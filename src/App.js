@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import TextInput from './TextInput';
+import TextOutput from './TextOutput';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userInput: ''
+    };
+    this.handleUserInput = this.handleUserInput.bind(this);
+  }
+
+  handleUserInput(e) {
+    this.setState({
+      userInput: e.target.value
+    });
+    console.log(this.state.userInput);
+  }
+
+  render() {
+    return (
+      <div className="App">
+
+        <header className="App-header">
+          <h1 className="App-title">Markdown Previewer</h1>
+        </header>
+
+        <div className="container">
+          <TextInput handleInput={this.handleUserInput} value={this.state.userInput} />
+          <TextOutput input={this.state.userInput} />
+        </div>
+
+        <footer>
+          Yo
+        </footer>
+
+      </div>
+    );
+  }
 }
 
 export default App;
